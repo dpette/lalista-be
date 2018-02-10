@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class PronounceTest < ActiveSupport::TestCase
+class PointTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

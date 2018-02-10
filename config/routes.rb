@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
-  resources :pronounces
+  resources :points
   resources :words
-  resources :people
+  resources :people do
+    collection do
+      get :chart
+    end
+  end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
