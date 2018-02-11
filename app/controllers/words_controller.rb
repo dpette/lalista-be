@@ -3,7 +3,7 @@ class WordsController < ApplicationController
 
   # GET /words
   def index
-    @words = Word.all
+    @words = Word.order(:name)
 
     render json: @words
   end

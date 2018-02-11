@@ -3,7 +3,7 @@ class PeopleController < ApplicationController
 
   # GET /people
   def index
-    @people = Person.all
+    @people = Person.order(:name)
 
     render json: @people
   end
@@ -38,10 +38,12 @@ class PeopleController < ApplicationController
     @person.destroy
   end
 
-  def chart
-    @chart = Point.group(:person_id).select('person_id, COUNT(*) AS points_count').order('points_count DESC')
+  def ranking
+    @ranking = Point.group(:person_id)
+                    .select('person_id, COUNT(*) AS points_count')
+                    .order('points_count DESC')
 
-    render json: @chart.as_json(only: :points_count, include: :person)
+    render json: @ranking.as_json(only: :points_count, include: :person)
   end
 
   private

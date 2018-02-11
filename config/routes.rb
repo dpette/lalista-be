@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   resources :words
   resources :people do
     collection do
-      get :chart
+      get :ranking
     end
   end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
