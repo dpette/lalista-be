@@ -39,9 +39,7 @@ class PeopleController < ApplicationController
   end
 
   def ranking
-    @ranking = Point.group(:person_id)
-                    .select('person_id, COUNT(*) AS points_count')
-                    .order('points_count DESC')
+    @ranking = Person.ranking
 
     render json: @ranking.as_json(only: :points_count, include: :person)
   end

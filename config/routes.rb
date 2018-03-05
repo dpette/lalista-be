@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :winners, only: [:index, :create]
   resources :points
   resources :words
   resources :people do
