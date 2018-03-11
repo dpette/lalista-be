@@ -15,6 +15,7 @@ class PointsController < ApplicationController
 
   # POST /points
   def create
+    puts point_params
     @point = Point.new(point_params)
 
     if @point.save
