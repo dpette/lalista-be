@@ -16,7 +16,10 @@ class Person < ApplicationRecord
   before_validation :humanize_name
 
   def self.ranking
-    Point.not_won.group(:person_id).select('person_id, COUNT(*) AS points_count').order('points_count DESC')
+    Point.not_won
+      .group(:person_id)
+      .select('person_id, COUNT(*) AS points_count')
+      .order('points_count DESC')
   end
 
   private
