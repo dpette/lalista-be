@@ -3,9 +3,9 @@ class PointsController < ApplicationController
 
   # GET /points
   def index
-    @points = Point.all
+    @points = Point.order('created_at DESC').limit(50)
 
-    render json: @points.as_json(include: [:person, :word])
+    render json: @points.includes(:person, :word).as_json(include: [:person, :word])
   end
 
   # GET /points/1
@@ -15,7 +15,6 @@ class PointsController < ApplicationController
 
   # POST /points
   def create
-    puts point_params
     @point = Point.new(point_params)
 
     if @point.save

@@ -15,6 +15,18 @@ class Word < ApplicationRecord
   validates :name, presence: true, uniqueness: true
   before_validation :downcase_name
 
+  date_as_bool :archived_at
+
+  scope :active, -> { where(archived_at: nil) }
+
+  def self.archived(archived = true)
+    if archived
+      where.not(archived_at: nil)
+    else
+      where(archived_at: nil)
+    end
+  end
+
   private
 
   def downcase_name

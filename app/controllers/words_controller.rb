@@ -1,9 +1,11 @@
 class WordsController < ApplicationController
-  before_action :set_word, only: [:show, :update, :destroy]
+  before_action :set_word, only: [:show, :update, :destroy, :archive]
 
   # GET /words
   def index
-    @words = Word.order(:name)
+    archived = params[:archived].in?(['true', '1']) ? true : nil 
+
+    @words = Word.archived(archived).order(:name)
 
     render json: @words
   end
@@ -46,6 +48,6 @@ class WordsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def word_params
-      params.require(:word).permit(:name)
+      params.require(:word).permit(:name, :archived_at, :archived)
     end
 end

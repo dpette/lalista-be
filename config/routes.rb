@@ -1,8 +1,13 @@
 Rails.application.routes.draw do
   resources :winners, only: [:index, :create]
   resources :points
-  resources :words
+  resources :words do 
+    member do 
+    end
+  end
   resources :people do
+    member do 
+    end
     collection do
       get :ranking
     end

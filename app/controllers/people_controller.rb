@@ -1,9 +1,11 @@
 class PeopleController < ApplicationController
-  before_action :set_person, only: [:show, :update, :destroy]
+  before_action :set_person, only: [:show, :update, :destroy, :archive]
 
   # GET /people
   def index
-    @people = Person.order(:name)
+    archived = params[:archived].in?(['true', '1']) ? true : nil 
+    
+    @people = Person.archived(archived).order(:name)
 
     render json: @people
   end
@@ -33,6 +35,7 @@ class PeopleController < ApplicationController
     end
   end
 
+
   # DELETE /people/1
   def destroy
     @person.destroy
@@ -52,6 +55,6 @@ class PeopleController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def person_params
-      params.require(:person).permit(:name)
+      params.require(:person).permit(:name, :archived_at, :archived)
     end
 end

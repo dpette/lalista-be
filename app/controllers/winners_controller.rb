@@ -16,7 +16,7 @@ class WinnersController < ApplicationController
 
     if @winner.save
       points.update_all(winner_id: @winner.id)
-      render json: @winner.as_json(only: :created_at, include: [:person, :points]), status: :created, location: @winner
+      render json: @winner.as_json(only: :created_at, include: [:person, :points]), status: :created
     else
       render json: @winner.errors, status: :unprocessable_entity
     end
