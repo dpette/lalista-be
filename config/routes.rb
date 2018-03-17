@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+  resources :cover_images do
+    collection do
+      get :active
+    end
+  end
   resources :winners, only: [:index, :create]
   resources :points
   resources :words do 
