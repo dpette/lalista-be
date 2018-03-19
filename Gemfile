@@ -43,3 +43,6 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 # A simple Rails Gem to get both a datetime and a boolean behaviour from the same database column
 gem 'date_as_bool'
+
+gem 'devise_token_auth'
+gem 'omniauth'
