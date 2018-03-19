@@ -46,3 +46,5 @@ gem 'date_as_bool'
 
 gem 'devise_token_auth'
 gem 'omniauth'
+
+gem 'cancancan', '~> 2.0'
