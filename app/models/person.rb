@@ -36,6 +36,9 @@ class Person < ApplicationRecord
   end
 
   def rank
+    r = Person.ranking.map(&:person_id).index(self.id)
+    return Person.active.count if !r
+    
     Person.ranking.map(&:person_id).index(self.id) + 1
   end
 
