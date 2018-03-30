@@ -34,6 +34,18 @@ class Person < ApplicationRecord
     end
   end
 
+  def rank
+    Person.ranking.map(&:person_id).index(self.id) + 1
+  end
+
+  def points_count
+    self.points.not_won.count
+  end
+
+  def total_points_count
+    self.points.count
+  end
+
   private
 
   def humanize_name

@@ -12,7 +12,7 @@ class PeopleController < ApplicationController
 
   # GET /people/1
   def show
-    render json: @person
+    render json: @person.as_json(methods: [:rank, :points_count, :total_points_count])
   end
 
   # POST /people
