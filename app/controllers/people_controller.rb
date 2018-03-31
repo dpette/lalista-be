@@ -3,8 +3,8 @@ class PeopleController < ApplicationController
 
   # GET /people
   def index
-    archived = params[:archived].in?(['true', '1']) ? true : nil 
-    
+    archived = params[:archived].in?(['true', '1']) ? true : nil
+
     @people = Person.archived(archived).order(:name)
 
     render json: @people
@@ -35,7 +35,6 @@ class PeopleController < ApplicationController
     end
   end
 
-
   # DELETE /people/1
   def destroy
     @person.destroy
@@ -48,6 +47,7 @@ class PeopleController < ApplicationController
   end
 
   private
+
     # Use callbacks to share common setup or constraints between actions.
     def set_person
       @person = Person.find(params[:id])

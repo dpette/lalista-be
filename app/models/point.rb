@@ -16,5 +16,4 @@ class Point < ApplicationRecord
   belongs_to :winner, optional: true
 
   scope :not_won, -> { where(winner_id: nil) }
-
 end

@@ -3,7 +3,7 @@ class WordsController < ApplicationController
 
   # GET /words
   def index
-    archived = params[:archived].in?(['true', '1']) ? true : nil 
+    archived = params[:archived].in?(['true', '1']) ? true : nil
 
     @words = Word.archived(archived).order(:name)
 
@@ -41,6 +41,7 @@ class WordsController < ApplicationController
   end
 
   private
+
     # Use callbacks to share common setup or constraints between actions.
     def set_word
       @word = Word.find(params[:id])

@@ -45,6 +45,7 @@ class CoverImagesController < ApplicationController
   end
 
   private
+
     # Use callbacks to share common setup or constraints between actions.
     def set_cover_image
       @cover_image = CoverImage.find(params[:id])
