@@ -39,6 +39,7 @@ class PointsController < ApplicationController
   end
 
   private
+
     # Use callbacks to share common setup or constraints between actions.
     def set_point
       @point = Point.find(params[:id])

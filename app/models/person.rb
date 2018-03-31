@@ -52,8 +52,8 @@ class Person < ApplicationRecord
 
   private
 
-  def humanize_name
-    self.name ||= ''
-    self.name = self.name.humanize
-  end
+    def humanize_name
+      self.name ||= ''
+      self.name = self.name.humanize
+    end
 end

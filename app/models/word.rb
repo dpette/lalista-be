@@ -30,8 +30,8 @@ class Word < ApplicationRecord
 
   private
 
-  def downcase_name
-    self.name ||= ''
-    self.name = self.name.downcase
-  end
+    def downcase_name
+      self.name ||= ''
+      self.name = self.name.downcase
+    end
 end
