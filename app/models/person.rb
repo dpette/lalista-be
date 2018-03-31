@@ -38,8 +38,8 @@ class Person < ApplicationRecord
   def rank
     r = Person.ranking.map(&:person_id).index(self.id)
     return Person.active.count if !r
-    
-    Person.ranking.map(&:person_id).index(self.id) + 1
+
+    r + 1
   end
 
   def points_count
