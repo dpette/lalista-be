@@ -21,9 +21,12 @@ class Person < ApplicationRecord
   scope :active, -> { where(archived_at: nil) }
 
   def self.ranking
+    people = Person.active.select('id')
+
     Point.not_won
-      .group(:person_id)
-      .select('person_id, COUNT(*) AS points_count')
+      .joins("RIGHT JOIN (#{people.to_sql}) as people ON points.person_id = people.id")
+      .group('people.id')
+      .select('people.id as person_id, COUNT(points.person_id) as points_count')
       .order('points_count DESC')
   end
 
