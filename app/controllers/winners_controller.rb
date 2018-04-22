@@ -10,9 +10,11 @@ class WinnersController < ApplicationController
 
   # POST /winners
   def create
-    person = Person.ranking.first.person
+    @winner = Winner.new(winner_params)
+
+    person = @winner.person || Person.ranking.first.person
     points = person.points.not_won
-    @winner = Winner.new(person: person)
+    @winner = Winner.new(person: person) if @winner.person.nil?
 
     if @winner.save
       points.update_all(winner_id: @winner.id)
@@ -23,6 +25,10 @@ class WinnersController < ApplicationController
   end
 
   private
+
+    def winner_params
+      params.permit(:winner).permit(:person_id)
+    end
 
     # Use callbacks to share common setup or constraints between actions.
     def set_winner
