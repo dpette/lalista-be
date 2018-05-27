@@ -17,7 +17,13 @@ class PeopleController < ApplicationController
 
   # POST /people
   def create
-    @person = Person.new(person_params)
+    @person = Person.where(name: person_params[:name]).first if person_params[:name]
+
+    if @person
+      @person.archived = false
+    else
+      @person = Person.new(person_params)
+    end
 
     if @person.save
       render json: @person, status: :created, location: @person
@@ -43,7 +49,7 @@ class PeopleController < ApplicationController
   def ranking
     @ranking = Person.ranking
 
-    render json: @ranking.as_json(only: :points_count, include: :person)
+    render json: @ranking.map {|x| {person: x, points_count: x.points_count}}
   end
 
   private
