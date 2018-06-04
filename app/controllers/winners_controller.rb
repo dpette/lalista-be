@@ -12,7 +12,7 @@ class WinnersController < ApplicationController
   def create
     @winner = Winner.new(winner_params)
 
-    person = @winner.person || Person.ranking.first.person
+    person = @winner.person || Person.find(Person.ranking.first.try(:id))
     points = person.points.not_won
     @winner = Winner.new(person: person) if @winner.person.nil?
 
