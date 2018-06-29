@@ -13,8 +13,9 @@ class Person < ApplicationRecord
   has_many :points
   has_many :words, through: :points, dependent: :destroy
 
+  validates :email, presence: true, uniqueness: true
   validates :name, presence: true, uniqueness: true
-  before_validation :humanize_name
+  before_validation :set_name_from_email
 
   date_as_bool :archived_at
 
@@ -52,10 +53,18 @@ class Person < ApplicationRecord
     self.points.count
   end
 
+  def gravatar
+    "https://www.gravatar.com/avatar/#{Digest::MD5.hexdigest(self.email)}?s=256"
+  end
+
   private
 
     def humanize_name
       self.name ||= ''
       self.name = self.name.humanize
+    end
+
+    def set_name_from_email
+      self.name = self.email.to_s.split('@').first.split('.').join(' ').titleize
     end
 end
