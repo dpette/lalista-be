@@ -36,6 +36,7 @@ class PointsController < ApplicationController
   # DELETE /points/1
   def destroy
     @point.destroy
+    render json: @point.as_json(include: [:person, :word])
   end
 
   private
