@@ -17,11 +17,15 @@ class PeopleController < ApplicationController
 
   # POST /people
   def create
-    @person = Person.where(name: person_params[:name]).first if person_params[:name]
+    @person = Person.archived.where(name: person_params[:name].humanize).first if person_params[:name]
 
     if @person
+      puts "ehi person exists, put archived to false"
+
       @person.archived = false
     else
+      puts "ehi person does not exists"
+
       @person = Person.new(person_params)
     end
 

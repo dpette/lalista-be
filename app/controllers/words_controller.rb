@@ -17,7 +17,16 @@ class WordsController < ApplicationController
 
   # POST /words
   def create
-    @word = Word.new(word_params)
+    @word = Word.archived.where(name: word_params[:name].downcase).first if word_params[:name]
+
+    if @word
+      puts "ehi word exists, put archived to false"
+      @word.archived = false
+    else
+      puts "ehi word does not exists"
+      @word = Word.new(word_params)
+    end
+
 
     if @word.save
       render json: @word, status: :created, location: @word
