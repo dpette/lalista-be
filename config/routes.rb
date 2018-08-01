@@ -6,7 +6,11 @@ Rails.application.routes.draw do
     end
   end
   resources :winners, only: [:index, :create]
-  resources :points
+  resources :points do
+    collection do 
+      get :chart_data
+    end
+  end
   resources :words do 
     member do 
     end

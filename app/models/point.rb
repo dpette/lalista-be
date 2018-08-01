@@ -34,7 +34,9 @@ class Point < ApplicationRecord
     # p_c_d
   end
 
-  def self.people_chart_data(from, to = Time.now)
+  def self.people_chart_data(from = 1.week.ago, to = Time.now)
+    from ||= 1.week.ago
+    to ||= Time.now
     dates_range = (from.to_date..to.to_date)
     p_c_d = {
       labels: dates_range.to_a,

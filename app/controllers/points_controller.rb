@@ -39,6 +39,13 @@ class PointsController < ApplicationController
     render json: @point.as_json(include: [:person, :word])
   end
 
+  def chart_data
+    from = params[:from].try(:to_date)
+    to   = params[:to].try(:to_date)
+
+    render json: Point.people_chart_data(from, to)
+  end
+
   private
 
     # Use callbacks to share common setup or constraints between actions.
