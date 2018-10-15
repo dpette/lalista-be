@@ -7,12 +7,12 @@ class PeopleController < ApplicationController
 
     @people = Person.archived(archived).order(:name)
 
-    render json: @people
+    render json: @people.as_json(methods: [:gravatar])
   end
 
   # GET /people/1
   def show
-    render json: @person.as_json(methods: [:rank, :points_count, :total_points_count])
+    render json: @person.as_json(methods: [:gravatar, :rank, :points_count, :total_points_count])
   end
 
   # POST /people
